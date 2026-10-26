@@ -281,9 +281,10 @@ final class MediaKeyInterceptor {
             return nil
 
         case .brightnessUp, .brightnessDown:
-            // Only intercept brightness if the brightness HUD feature is enabled and brightness
-            // interception is still working.
-            guard brightnessInterceptionWorking else {
+            // Let BetterDisplay handle its extended range, and never intercept when disabled.
+            guard UserDefaults.standard.bool(forKey: "brightnessEnabled"),
+                NSRunningApplication.runningApplications(withBundleIdentifier: "pro.betterdisplay.BetterDisplay").isEmpty,
+                brightnessInterceptionWorking else {
                 return Unmanaged.passRetained(cgEvent) // Pass through to system
             }
 

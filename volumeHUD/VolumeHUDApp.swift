@@ -155,7 +155,8 @@ class AppDelegate: NSObject, NSApplicationDelegate, @preconcurrency UNUserNotifi
                 logger.info("Brightness HUD enabled; starting brightness monitoring.")
                 brightnessMonitor.startMonitoring()
             } else {
-                logger.info("Brightness HUD disabled; skipping brightness monitoring.")
+                logger.info("Brightness HUD disabled; stopping brightness monitoring.")
+                brightnessMonitor.stopMonitoring()
             }
         }
 
